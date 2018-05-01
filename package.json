@@ -1,0 +1,26 @@
+{
+  "name": "wing-spa",
+  "version": "1.0.0",
+  "description": "This is demo to show how to use wing.js",
+  "main": "app.js",
+  "dependencies": {},
+  "devDependencies": {
+    "node-basis": "^1.0.4"
+  },
+  "scripts": {
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/flybirdsoft/Wing.git"
+  },
+  "keywords": [
+    "wing.js"
+  ],
+  "author": "wuweiwei",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/flybirdsoft/Wing/issues"
+  },
+  "homepage": "https://github.com/flybirdsoft/Wing#readme"
+}

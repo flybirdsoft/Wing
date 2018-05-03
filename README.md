@@ -114,6 +114,7 @@ var wRouter = Wing.wRouter; //下面用到wRouter对象
 		redirectTo
 			默认路由配置
 
+#### 配置控制器(controller)
 
 	wRouter.controller(controllerName,callback)
 	配置控制器,当路由被触发会调用callback函数

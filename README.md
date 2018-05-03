@@ -2,13 +2,21 @@
 This is simple SPA framework
 
 引用wing.js
+
 引用方式
+
 wing.js
+
 下载地址：http://www.flybirdsoft.com/wing/libs/wing.js 
+
 示例：http://www.flybirdsoft.com/wing/demo
+
 页面+路由+控制器 配置示例
+
 wRouter对象用于设置路由和控制器
+
 var wRouter = Wing.wRouter; //下面用到wRouter对象
+
 HTML
 
 路由配置

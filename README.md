@@ -115,129 +115,130 @@ var wRouter = Wing.wRouter; //下面用到wRouter对象
 			默认路由配置
 
 
-wRouter.controller(controllerName,callback)
-配置控制器,当路由被触发会调用callback函数
+	wRouter.controller(controllerName,callback)
+	配置控制器,当路由被触发会调用callback函数
 
-wRouter.controller("index",function(args){
-	//args 是路由url动态参数
-	//coding here
-});
-		
-wRouter.commonController(callback)
-配置通用控制器,不管触发哪个路由都会调用callback函数;
+	wRouter.controller("index",function(args){
+		//args 是路由url动态参数
+		//coding here
+	});
 
-wRouter.commonController(function(isFirst){
-	//isFirst is boolean ,是否首次加载
-	//coding here
-})
-		
-wRouter.callController(controllerName,objectJSON)
-调用某个controller;
+	wRouter.commonController(callback)
+	配置通用控制器,不管触发哪个路由都会调用callback函数;
 
-wRouter.callController(“myController”，{key:value});
-		
-wRouter.endController(callback)
-档切换路由后会触发endController;
+	wRouter.commonController(function(isFirst){
+		//isFirst is boolean ,是否首次加载
+		//coding here
+	})
 
-wRouter.endController(function (controllerName) {
-    
-});
-		
-辅助功能
-$http.template(path)
+	wRouter.callController(controllerName,objectJSON)
+	调用某个controller;
+
+	wRouter.callController(“myController”，{key:value});
+
+	wRouter.endController(callback)
+	档切换路由后会触发endController;
+
+	wRouter.endController(function (controllerName) {
+
+	});
+
+## 辅助功能
+	$http.template(path)
 载入模板页面
+
 $http是全局变量
-var html = $http.template("tpls/resource.html");
-docment.getElementById("myId").innerHTML = html;
+	var html = $http.template("tpls/resource.html");
+	docment.getElementById("myId").innerHTML = html;
 		
-$location
-$location是全局对象,封装了url信息,目前对象是只读功能
+	$location
+	$location是全局对象,封装了url信息,目前对象是只读功能
 
-$location.url
-$location.host
-$location.fileName
-$location.port
-$location.param      /*?后面的get字符串*/
-$location.params   
-/*格式是?key=value&key=value ， 然后转换成{key:"xx",value:"ddd"}存入params*/
-$location. action      /*url中#号后面的/xx/xxx */
+	$location.url
+	$location.host
+	$location.fileName
+	$location.port
+	$location.param      /*?后面的get字符串*/
+	$location.params   
+	/*格式是?key=value&key=value ， 然后转换成{key:"xx",value:"ddd"}存入params*/
+	$location. action      /*url中#号后面的/xx/xxx */
 
 		
-模板渲染应用
-获取模板引擎对象
+## 模板渲染应用
+###### 获取模板引擎对象
 var template = Wing.wTemplate; //下面用到template对象
 设置模板标记
 
     template.startSymbol("{{"); //可选项 startSymbol 默认{{
     template.endSymbol("}}"); //可选项endSymbol 默认}}
 		
-HTML
+###### HTML
 
-<div id= "repeatDOM" class="app-myappfl {{bgcolor}}">
-    <div class="app-myapp-shared">{{numbers.app.count}}</div>
-    <div class="app-myapp-photo icons"></div>
-    <div class="app-myapp-caption">{{title}}</div>
-    <div class="app-myapp-op">
-        <a target="_blank" href="http://{{url}}">{{url}}</a>
-    </div>
-</div>
-
-		
-模板数据渲染
-
-var data = [
-    {
-        title:"我的应用",
-        url:“www.xx.com",
-        numbers:{
-            app:{
-                count:50
-            }
-        }
-    }
-]
-
-template.repeat({
-    repeatElement:document.getElementById("repeatDOM"),
-    data : data
-});
-
-或
-
-template.repeat({
-    repeatElement:document.getElementById("repeatDOM"),
-    data : data,
-    render:function(object){
-        var item = object.item;
-        return{
-            "title":"自定义字段值"
-        }
-    }
-});
+	<div id= "repeatDOM" class="app-myappfl {{bgcolor}}">
+	    <div class="app-myapp-shared">{{numbers.app.count}}</div>
+	    <div class="app-myapp-photo icons"></div>
+	    <div class="app-myapp-caption">{{title}}</div>
+	    <div class="app-myapp-op">
+		<a target="_blank" href="http://{{url}}">{{url}}</a>
+	    </div>
+	</div>
 
 		
-模板数据渲染参数说明
+###### 模板数据渲染
 
-template.repeat({
-    type : "cover",
-    /*
-    数据渲染方式;默认cover,
-    type=insert 是把data添加到现有DOM元素前边
-    type=append 是把data数据添加到DOM元素后边
-    */
-    repeatElement:$("#repeatDOM")[0],
-    /*被渲染的元素即模板*/
-    data : data,
-    /*渲染的数据 is array*/
-    render:function(object){
-        var item = object.item;
-        var index = object.index;
-        return{
-            “title”:“自定义字段值”,
-            “url”  :”http://”+item.url
-        }
-    }
-    /*
-    render 函数是data数据处理函数,用于自定义字段值
-    */
-});
+	var data = [
+	    {
+		title:"我的应用",
+		url:“www.xx.com",
+		numbers:{
+		    app:{
+			count:50
+		    }
+		}
+	    }
+	]
+
+	template.repeat({
+	    repeatElement:document.getElementById("repeatDOM"),
+	    data : data
+	});
+
+	或
+
+	template.repeat({
+	    repeatElement:document.getElementById("repeatDOM"),
+	    data : data,
+	    render:function(object){
+		var item = object.item;
+		return{
+		    "title":"自定义字段值"
+		}
+	    }
+	});
+
+		
+###### 模板数据渲染参数说明
+
+	template.repeat({
+	    type : "cover",
+	    /*
+	    数据渲染方式;默认cover,
+	    type=insert 是把data添加到现有DOM元素前边
+	    type=append 是把data数据添加到DOM元素后边
+	    */
+	    repeatElement:$("#repeatDOM")[0],
+	    /*被渲染的元素即模板*/
+	    data : data,
+	    /*渲染的数据 is array*/
+	    render:function(object){
+		var item = object.item;
+		var index = object.index;
+		return{
+		    “title”:“自定义字段值”,
+		    “url”  :”http://”+item.url
+		}
+	    }
+	    /*
+	    render 函数是data数据处理函数,用于自定义字段值
+	    */
+	});

@@ -3,7 +3,7 @@ This is simple SPA framework
 
 引用wing.js
 
-引用方式
+##引用方式
 
 wing.js
 
@@ -11,15 +11,14 @@ wing.js
 
 示例：http://www.flybirdsoft.com/wing/demo
 
-页面+路由+控制器 配置示例
+##页面+路由+控制器 配置示例
 
 wRouter对象用于设置路由和控制器
 
 var wRouter = Wing.wRouter; //下面用到wRouter对象
 
-HTML
 
-路由配置
+###路由配置
 			
 	wRouter.config({
 		container : document.getElementById("view"),          /*设置单页应用的容器,用于载入单页面*/
@@ -47,7 +46,7 @@ HTML
 	});
 			
 		
-控制器配置
+###控制器配置
 
 	wRouter.controller("index",function(args){
 
@@ -66,49 +65,56 @@ HTML
 	});
 		
 上述三个操作配置好,程序就能跑起来,是不是很简单！
-路由控制器API
-wRouter.config(config)
-配置路由信息
-wRouter.config({
-	container : document.getElementById("view"),          /*设置单页应用的容器,用于载入单页面*/
-	routes:[
-		{
-			url:"/index",                         /*页面路由*/
-			controller:"index",                   /*路由的名称,根据含义起名*/
-			templateUrl:"tpls/index/index.html"   /*载入的页面,当在浏览器执行"#/index"后,会自动载入此页面*/
-		},
-		{
-			url:"/project/:projectId/:versionId/:projectName/:folderId",
-			//浏览器地址URL例如: www.x.com/project/2018/123456/abc/myforder
-			controller:"project",
-			templateUrl:"tpls/projects/projectFileList.html"
-		},
-		{
-			url:"/flow",
-			controller:"flow",
-			templateUrl:"tpls/flow/flow.html"
+
+
+##路由控制器API
+
+	wRouter.config(config);
+	
+##配置路由信息
+
+	wRouter.config({
+		container : document.getElementById("view"),          /*设置单页应用的容器,用于载入单页面*/
+		routes:[
+			{
+				url:"/index",                         /*页面路由*/
+				controller:"index",                   /*路由的名称,根据含义起名*/
+				templateUrl:"tpls/index/index.html"   /*载入的页面,当在浏览器执行"#/index"后,会自动载入此页面*/
+			},
+			{
+				url:"/project/:projectId/:versionId/:projectName/:folderId",
+				//浏览器地址URL例如: www.x.com/project/2018/123456/abc/myforder
+				controller:"project",
+				templateUrl:"tpls/projects/projectFileList.html"
+			},
+			{
+				url:"/flow",
+				controller:"flow",
+				templateUrl:"tpls/flow/flow.html"
+			}
+		],
+		otherwise:{
+			redirectTo:"/index"
 		}
-	],
-	otherwise:{
-		redirectTo:"/index"
-	}
-});
+	});
 
 参数说明：
-container
-	模板容器
 
-routes
-	url
-		设置页面路由
-	controller
-		控制器名字,wRouter.controller()用到这个名字
-	templateUrl
-		配置模板页面,当路由触发时,会自动调用模板页面并载入container容器里
-otherwise
-	redirectTo
-		默认路由配置
-		
+	container
+		模板容器
+
+	routes
+		url
+			设置页面路由
+		controller
+			控制器名字,wRouter.controller()用到这个名字
+		templateUrl
+			配置模板页面,当路由触发时,会自动调用模板页面并载入container容器里
+	otherwise
+		redirectTo
+			默认路由配置
+
+
 wRouter.controller(controllerName,callback)
 配置控制器,当路由被触发会调用callback函数
 

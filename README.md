@@ -9,7 +9,7 @@ wing.js
 
 下载地址：http://www.flybirdsoft.com/wing/libs/wing.js 
 
-示例：http://www.flybirdsoft.com/wing/demo
+参考地址：http://www.flybirdsoft.com/wing/
 
 ## 页面+路由+控制器 配置示例
 

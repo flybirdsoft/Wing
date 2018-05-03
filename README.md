@@ -18,7 +18,7 @@ wRouter对象用于设置路由和控制器
 var wRouter = Wing.wRouter; //下面用到wRouter对象
 
 
-### 路由配置
+##### 路由配置
 			
 	wRouter.config({
 		container : document.getElementById("view"),          /*设置单页应用的容器,用于载入单页面*/

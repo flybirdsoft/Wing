@@ -46,7 +46,7 @@ var wRouter = Wing.wRouter; //下面用到wRouter对象
 	});
 			
 		
-### 控制器配置
+##### 控制器配置
 
 	wRouter.controller("index",function(args){
 
@@ -71,7 +71,7 @@ var wRouter = Wing.wRouter; //下面用到wRouter对象
 
 	wRouter.config(config);
 	
-## 配置路由信息
+#### 配置路由信息
 
 	wRouter.config({
 		container : document.getElementById("view"),          /*设置单页应用的容器,用于载入单页面*/
@@ -165,14 +165,14 @@ $http是全局变量
 
 		
 ## 模板渲染应用
-###### 获取模板引擎对象
+##### 获取模板引擎对象
 var template = Wing.wTemplate; //下面用到template对象
 设置模板标记
 
     template.startSymbol("{{"); //可选项 startSymbol 默认{{
     template.endSymbol("}}"); //可选项endSymbol 默认}}
 		
-###### HTML
+##### HTML
 
 	<div id= "repeatDOM" class="app-myappfl {{bgcolor}}">
 	    <div class="app-myapp-shared">{{numbers.app.count}}</div>
@@ -184,7 +184,7 @@ var template = Wing.wTemplate; //下面用到template对象
 	</div>
 
 		
-###### 模板数据渲染
+##### 模板数据渲染
 
 	var data = [
 	    {
@@ -217,7 +217,7 @@ var template = Wing.wTemplate; //下面用到template对象
 	});
 
 		
-###### 模板数据渲染参数说明
+##### 模板数据渲染参数说明
 
 	template.repeat({
 	    type : "cover",

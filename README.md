@@ -21,49 +21,49 @@ HTML
 
 路由配置
 			
-wRouter.config({
-	container : document.getElementById("view"),          /*设置单页应用的容器,用于载入单页面*/
-	routes:[
-		{
-			url:"/index",                         /*页面路由*/
-			controller:"index",                   /*路由的名称,根据含义起名*/
-			templateUrl:"tpls/index/index.html"   /*载入的页面,当在浏览器执行"#/index"后,会自动载入此页面*/
-		},
-		{
-			url:"/project/:projectId/:versionId/:projectName/:folderId",
-			//浏览器地址URL例如: www.x.com/project/2018/123456/abc/myforder
-			controller:"project",
-			templateUrl:"tpls/projects/projectFileList.html"
-		},
-		{
-			url:"/flow",
-			controller:"flow",
-			templateUrl:"tpls/flow/flow.html"
+	wRouter.config({
+		container : document.getElementById("view"),          /*设置单页应用的容器,用于载入单页面*/
+		routes:[
+			{
+				url:"/index",                         /*页面路由*/
+				controller:"index",                   /*路由的名称,根据含义起名*/
+				templateUrl:"tpls/index/index.html"   /*载入的页面,当在浏览器执行"#/index"后,会自动载入此页面*/
+			},
+			{
+				url:"/project/:projectId/:versionId/:projectName/:folderId",
+				//浏览器地址URL例如: www.x.com/project/2018/123456/abc/myforder
+				controller:"project",
+				templateUrl:"tpls/projects/projectFileList.html"
+			},
+			{
+				url:"/flow",
+				controller:"flow",
+				templateUrl:"tpls/flow/flow.html"
+			}
+		],
+		otherwise:{
+			redirectTo:"/index"
 		}
-	],
-	otherwise:{
-		redirectTo:"/index"
-	}
-});
+	});
 			
 		
 控制器配置
 
-wRouter.controller("index",function(args){
-	
-});
-wRouter.controller("project",function(args){
-	/*
-	以下四个参数对应上面第二个路由的url参数
-	args.projectId => 对应 :projectId
-	args.versionId => 对应 :versionId
-	args.projectName => 对应 :projectName
-	args.folderId => 对应 :folderId
-	*/
-});
-wRouter.controller("flow",function(args){
-	
-});
+	wRouter.controller("index",function(args){
+
+	});
+	wRouter.controller("project",function(args){
+		/*
+		以下四个参数对应上面第二个路由的url参数
+		args.projectId => 对应 :projectId
+		args.versionId => 对应 :versionId
+		args.projectName => 对应 :projectName
+		args.folderId => 对应 :folderId
+		*/
+	});
+	wRouter.controller("flow",function(args){
+
+	});
 		
 上述三个操作配置好,程序就能跑起来,是不是很简单！
 路由控制器API

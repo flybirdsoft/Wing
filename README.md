@@ -3,7 +3,7 @@ This is simple SPA framework
 
 引用wing.js
 
-##引用方式
+## 引用方式
 
 wing.js
 
@@ -11,14 +11,14 @@ wing.js
 
 示例：http://www.flybirdsoft.com/wing/demo
 
-##页面+路由+控制器 配置示例
+## 页面+路由+控制器 配置示例
 
 wRouter对象用于设置路由和控制器
 
 var wRouter = Wing.wRouter; //下面用到wRouter对象
 
 
-###路由配置
+### 路由配置
 			
 	wRouter.config({
 		container : document.getElementById("view"),          /*设置单页应用的容器,用于载入单页面*/
@@ -46,7 +46,7 @@ var wRouter = Wing.wRouter; //下面用到wRouter对象
 	});
 			
 		
-###控制器配置
+### 控制器配置
 
 	wRouter.controller("index",function(args){
 
@@ -67,11 +67,11 @@ var wRouter = Wing.wRouter; //下面用到wRouter对象
 上述三个操作配置好,程序就能跑起来,是不是很简单！
 
 
-##路由控制器API
+## 路由控制器API
 
 	wRouter.config(config);
 	
-##配置路由信息
+## 配置路由信息
 
 	wRouter.config({
 		container : document.getElementById("view"),          /*设置单页应用的容器,用于载入单页面*/

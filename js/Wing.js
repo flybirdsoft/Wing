@@ -18,25 +18,25 @@ www.github.com/flybirdosft
 		version:"1.0",
 		route:[],
 		defRouteIndex:0,
-		commonControllerHandler:function(isFirst){},          /*所有controller功能调用的函数句柄*/
+		commonControllerHandler:function(isFirst){},         
 		endControllerHandler   :function(controllerName){},
-		isFirstLoad:true ,                                    /*是否是第一次调用commonControllerHandler*/
+		isFirstLoad:true ,                                   
 		prevControllerName:""
 	};
 
-	wRouter.event={};                    /*存储事件的处理句柄，通过wRouter.trigger函数可以触发*/
-	wRouter.http={useMask:true};         /*是否使用遮罩*/
-	wRouter.template={};                 /*模板命名空间，内部使用，用户模板页面载入功能*/
+	wRouter.event={};                    
+	wRouter.http={useMask:true};        
+	wRouter.template={};                 
 	
 	/*浏览器URL存储管理*/
 	wRouter.location={
 		url:"",
 		host:"",
-		fileName:"",    /*获得URL中的文件名*/
+		fileName:"",    
 		port:"",
-		param:"",      /*?后面的get字符串*/
-		params:[],     /*参数格式是?key=value&key=value ， 然后转换成{key:"xx",value:"ddd"}存入params*/
-		action:""      /*url中#号后面的/xx/xxx */
+		param:"",     
+		params:[],    
+		action:""    
 	};
 
 
@@ -72,13 +72,7 @@ www.github.com/flybirdosft
 		}
 	}
 
-	/*
-	*******************************
-	wRouter.location对象的调用接口
-	调用wRouter.location.getURL(url);
-	接口类型：内部
-	*******************************
-	*/
+
 	wRouter.location.getURL=function(url){
 		if(url!=undefined)
 		{
@@ -91,13 +85,7 @@ www.github.com/flybirdosft
 		this.convertURL();
 	}
 
-	/*
-	******************************
-	功能：解析URL,获取action路径信息
-	结果：把URL中的 action 存储到 wRouter.location对象里
-	接口类型：内部
-	******************************
-	*/
+
 	wRouter.location.convertURL=function(){
 		var r,ar,arSub,i,pItem={key:"",value:""};
 		r=/\/[\u4E00-\u9FFF]+|\w+\.html/;
@@ -144,73 +132,16 @@ www.github.com/flybirdosft
 
 	
 	
-	/*
-	****************************************
-	接口类型：外部
-	功能：配置路由
-	参数：
-	routes={
-		templateContentId:"#mainContent",
-		routes:[
-			{
-			url:"/action/index",
-			controller:"myController",
-			template:"#templateIndex"
-			}
-			,	
-			{
-			url:"/action/action2",
-			controller:"myController",
-			templateUrl:"xxx.html"
-			}
-			,
-			{
-			url:"/action/action2",
-			controller:"myController"
-			handler:function(){}       通过wRouter.controller()函数添加
-			}
-		],
-		otherwise:{
-			redirectTo:"action/index",
-			handler:function(){}
-		}
-	}
-	****************************************
-	*/
+
 	wRouter.config=function(routes){
 		this.route = routes;
 		wRouter.controlLink();
 		wRouter.onLoad();
 	}
 
-	/*
-	*************************************
-	类型：对外接口
-	功能：添加路由
-	*************************************
-	*/
+
 	wRouter.addRoute=function(routes){
-		/*
-		routes=[
-			{
-			url:"/action/index",
-			controller:"myController",
-			template:"#templateIndex"
-			}
-			,	
-			{
-			url:"/action/action2",
-			controller:"myController",
-			templateUrl:"xxx.html"
-			}
-		]
-		或
-		routes={
-			url:"/action/action2",
-			controller:"myController",
-			templateUrl:"xxx.html"	
-		}
-		 */
+
 		var i;
 		if(routes.length==undefined)
 		{
@@ -226,13 +157,7 @@ www.github.com/flybirdosft
 	}
 
 
-	/*
-	***********************************
-	说明：所有的URL请求都执行此commonController
-	功能：在wRouter.controller(function(){...})前执行
-	接口类型：外部
-	***********************************
-	*/
+
 	wRouter.commonController=function(f){
 		if(f!=undefined)
 		{
@@ -244,14 +169,7 @@ www.github.com/flybirdosft
 		}
 	}
 
-	/*
-	***********************************
-	说明：所有的URL请求都执行此endController
-	功能：在wRouter.controller(function(){...})后执行
-	，作用是用户自定义清理前一个controller的清理工作
-	接口类型：外部
-	***********************************
-	*/
+
 	wRouter.endController=function(f){
 		if(f!=undefined)
 		{
@@ -263,13 +181,7 @@ www.github.com/flybirdosft
 		}
 	}
 
-	/*
-	*******************************************
-	功能：注册函数方法，当URL发生变化执行对应的URL对应的函数(此方法多次调用)
-	注意：进入或刷新页面时执行
-	接口类型：外部
-	********************************************
-	*/
+
 	wRouter.controller=function(controllerName,f){
 		var i,rLen,routes,otherwise;
 		var reg=/\/:\w{1,}/;
@@ -299,12 +211,7 @@ www.github.com/flybirdosft
 		}	
 	}
 
-	/*
-	***************************************
-	功能：调用其它的controller
-	接口类型：外部
-	***************************************
-	*/
+
 	wRouter.callController=function(controllerName,json){
 		/*
 		controllerName=需要调用的controller名称
@@ -324,12 +231,7 @@ www.github.com/flybirdosft
 		}
 	}
 
-	/*
-	***************************************
-	说明：由wRourer.controller()调用
-	功能：匹配  浏览器URL action 与 wRouter.config(routes)的路由位置信息
-	***************************************
-	*/
+
 	wRouter.run=function(router){
 		wRouter.mask.init();
 		wRouter.location.getURL();
@@ -362,21 +264,15 @@ www.github.com/flybirdosft
 		{;}
 	}
 
-	/*
-	*******************************************
-	功能：
-	匹配地址栏URL与wRouter.route.routes[]中的url
-	匹配成功后执行用户代码
-	*******************************************
-	*/
+
 	wRouter.compareURL=function(router){
 		var action,rAction;
-		var reg=/\/:\w{1,}/g , rAction2=""; /*如果router是/action/action2/:xx，存储去掉:/xx的结果 */
+		var reg=/\/:\w{1,}/g , rAction2=""; 
 		/*reg是去掉rAction中的 /:xx */
 		var args={},mapParam={},v,pos;
 		var routes = this.route.routes;
 		router = router;
-		action = wRouter.location.action; /*格式是：/action/action2 */
+		action = wRouter.location.action; 
 		rAction =router.url;
 		if(router.url.indexOf(":")>0)
 		{
@@ -423,13 +319,7 @@ www.github.com/flybirdosft
 		}
 	}
 
-	/*
-	*********************************************
-	功能：
-	匹配地址栏URL与wRouter.route.routes[]中的url
-	匹配成功后执行用户代码
-	*********************************************
-	*/
+
 	wRouter.compareURLs=function(){
 		var i, action,rAction,i,rLen,routes;
 		var reg=/\/:\w{1,}/g , rAction2=""; /*如果router是/action/action2/:xx，存储去掉:/xx的结果 */
@@ -494,19 +384,9 @@ www.github.com/flybirdosft
 		}
 	}
 
-	/*
-	*********************************************
-	功能：
-	处理浏览器url后面的参数与路由的参数匹配(即/:xx/:yy)
-	匹配成功后执行用户代码
-	*********************************************
-	*/
+
 	wRouter.mapRouteUrlParam = function(routeUrl,url){
-		/*
-		routeUrl,url is string
-		routeUrl is 路由表里配置的参数（即:/xx/:yy）
-		url is 浏览器的URL参数(即/xx/yy)
-		*/
+
 		var routeAr = [] , ar = [] ,routeUrlParam="",urlParam="",i,object={},pos=-1;
 		
 		pos = routeUrl.indexOf("/:");
@@ -524,11 +404,7 @@ www.github.com/flybirdosft
 		return object;
 	}
 	
-	/*
-	 * 对routes[].handler函数里的参数注入
-	 * 被wRouter.compareURLs()和wRouter.compareURL()调用
-	 * ==未使用==
-	*/
+
 	wRouter.Injection=function(fun,injectionObj){
 		/*fun即函数名传递进来,injectionObj是字符串数组依赖注入的对象名*/
 		var i,j;
@@ -563,13 +439,7 @@ www.github.com/flybirdosft
 
 
 
-	/*
-	************************************************
-	模板命名空间
-	wRouter.template={}
-	wRouter.template.tmpl()功能是把模板载入模板容器里
-	************************************************
-	*/
+
 	wRouter.template.tmpl=function(router){
 		if(wRouter.route.container!=undefined)
 		{
@@ -615,22 +485,9 @@ www.github.com/flybirdosft
 
 
 
-	/*
-	****************************
-	请求命名空间
-	wRouter.http={}
-	处理ajax请求
-	****************************
-	*/
+
 	
-	/*
-	options={
-	url:url,
-	param:{a:"aaa",b:"bbb"},
-	success:function(){},
-	error:function(){}
-	}
-	*/
+
 	wRouter.http.get=function(options){
 		/*
 		options={
@@ -668,12 +525,7 @@ www.github.com/flybirdosft
 	     });
 	}
 
-	/*
-	********************************
-	功能：获取模板页面
-	接口类型:内部接口
-	********************************
-	*/
+
 	wRouter.http.getTmpl=function(options){
 		/*
 		options={
@@ -715,15 +567,7 @@ www.github.com/flybirdosft
 	}
 
 	wRouter.http.postData=function(options){
-		/*
-		options={
-			url:"xxx",
-			data:{key:value},
-			form:"#id",         form优先
-			success:function(){},
-			error:function(){}
-		}
-		*/
+
 		if(options.url==undefined)
 		{
 			throw new Error("参数不足");
@@ -748,13 +592,7 @@ www.github.com/flybirdosft
 	    });	
 	}
 
-	/*
-	*******************************************
-	功能： 获取模板页面
-	接口类型：外部接口
-	调用示例：$http.template("templates/list.html")
-	*******************************************
-	*/
+
 	wRouter.http.template = function(url){
 		var result="";
 	    wAjax.ajax({
@@ -780,11 +618,7 @@ www.github.com/flybirdosft
 	$http.template = wRouter.http.template;
 	win.$http = $http;
 
-	/*
-	********************************
-	对页面的<a>链接进行处理 
-	********************************
-	*/
+
 	wRouter.controlLink=function(){
 		/*注意：页面上的链接方式应为 <a href="#/action/action2" route=""></a>*/
 		var r=/#\S+/;
@@ -809,11 +643,7 @@ www.github.com/flybirdosft
 	}
 
 
-	/*
-	*********************
-	mask遮罩
-	*********************
-	*/
+
 	wRouter.mask={created:false};
 	wRouter.mask.init=function(){
 		if(wRouter.mask.created){return;}
@@ -846,14 +676,7 @@ www.github.com/flybirdosft
 
 	
 	
-	
-	/*
-	*************************
-	wAjax 类似于$.ajax,
-	代替$.ajax功能
-	接口类型：外部或内部
-	*************************
-	*/
+
 	var wAjax = {
 		xmlhttp : null,
 
@@ -972,7 +795,7 @@ www.github.com/flybirdosft
 		} /*end ajax*/
 	};
 
-	/**** end wRouter.js*****/
+
 
 	var template={
 		_startSymbol:"\{\{",
@@ -981,8 +804,8 @@ www.github.com/flybirdosft
 		contentNode:null
 	};
 
-	template.useES5GetSet = true;  //if use es5 get set method
-	template.prefix = "_";         //当使用es5 get set时,prefix is "_"
+	template.useES5GetSet = true; 
+	template.prefix = "_";         
 
 	template.useEs5DataBind = function(bool){
 		template.useES5GetSet = bool;
@@ -1019,7 +842,7 @@ www.github.com/flybirdosft
 		this._endSymbol = symbol;
 	};
 
-	/*模板函数入口*/
+
 	template.repeat = function(options){
 
 
@@ -1034,28 +857,28 @@ www.github.com/flybirdosft
 			return;
 		}
 
-		var tmpl={string:""},all="";            /*tmpl=依据模板替换后的数据,all=全部替换的数据*/
-		var data =[];                           /*存储传入的数据，list*/
-		var i,j,len=0,item,subItem;               /*item=data中的每一行数据 , len=data数组长度*/
-		var v,subv,jsonStr="";                  /*v,subv存储JOSN中的key; jsonStr存储JSON的表达式形式如：title.sum*/
-		var target;                             /*存储模板DOM对象*/
-		var nextNode=null,lastNode=null;        /*用于parent.insertBefore*/
-		var parent;                             /*模板的父节点*/
-		var fun=function(){},result,v;          /*fun是render回调函数*/
+		var tmpl={string:""},all="";            
+		var data =[];                         
+		var i,j,len=0,item,subItem;             
+		var v,subv,jsonStr="";               
+		var target;                         
+		var nextNode=null,lastNode=null;       
+		var parent;                       
+		var fun=function(){},result,v;     
 		
 		var resultObject={};
 		var json={};
-		var node=null;                          /*插入的节点元素*/
+		var node=null;                         
 		
-		var strV                                /*即页面字段值例如：${title}*/,reg/*strV的正则表达式*/;
-		var attrValue="";                      /*repeatId元素上的遍历属性值*/
+		var strV                         
+		var attrValue="";                
 		
 		target = options.repeatElement;
 		parent = target.parentNode;
 
 		if(options.type==undefined ||(options.type!=undefined && options.type=="cover"))
 		{
-			template.deleteNode(target);              /*删除所有节点*/
+			template.deleteNode(target);          
 		}
 		
 		if(options.template==undefined)
@@ -1095,17 +918,17 @@ www.github.com/flybirdosft
 			options.onloadBefore.call(this);
 		}
 
-		for(i=len-1;i>=0;i--)  /*节点是到的插入才是顺序显示*/
+		for(i=len-1;i>=0;i--)  
 		{
 			item = data[i];
 
 			resultObject={index:i,item:data[i]};
 
-			result = fun.call(this,resultObject);           /*执行回调函数*/
+			result = fun.call(this,resultObject);      
 
-			node = document.createElement(target.nodeName); /*创建插入的节点*/
+			node = document.createElement(target.nodeName); 
 
-			for(j=0;j<target.attributes.length;j++)         /*遍历repeat元素上的属性*/
+			for(j=0;j<target.attributes.length;j++)     
 			{
 				attrValue = target.attributes.item(j).value;
 				for(v in result)
@@ -1182,7 +1005,7 @@ www.github.com/flybirdosft
 				node.setAttribute("templateItem-index",i);
 			}
 
-		} /*end for 模板渲染完毕*/
+		} 
 
 		target.style.display="none";
 
@@ -1196,8 +1019,8 @@ www.github.com/flybirdosft
 
 		}
 
-		var innerData = this.copyUserData(data); /*把数据进行深拷贝*/
-		this.extendData(data); /*便利所有属性并加下划线*/
+		var innerData = this.copyUserData(data); 
+		this.extendData(data); 
 
 		return new this.ModelView({
 			innerData : innerData,
@@ -1211,7 +1034,7 @@ www.github.com/flybirdosft
 
 
 
-	/*获取JSON的对象形式*/
+
 	template.getScope = function(item,v,tmpl,scopeStr){
 		var jsonStr="",subv,subItem;
 		subItem = item[v];
@@ -1383,7 +1206,7 @@ www.github.com/flybirdosft
 
 
 	template.ModelView = function(options){
-		/* autoReview 属性(外部控制)是否通过es5的get,set自动更新页面*/
+	
 		this.autoReview = true;
 
 		this.innerData = options.innerData;
@@ -1391,17 +1214,14 @@ www.github.com/flybirdosft
 		this.parentNode = options.parentNode;
 		this.target = options.target;
 		this.changedIndexs = [];
-		/*
-		this.row = {...}; 用于repeatToSingleNode()函数
-		this.changedIndexs = []; 存放数据被改变的索引
-		*/
+
 		if(template.useES5GetSet)
 		{
 			this.es5GetSet();
 		}
 	}
 
-	/*通过索引查找DOM段素*/
+
 	template.ModelView.prototype.findNode = function(itemIndex){
 		var i , index = 0 , isStart = false;
 		var childs = this.parentNode.childNodes;
@@ -1431,9 +1251,9 @@ www.github.com/flybirdosft
 		var node ,v ,j;
 		var target = this.target;
 		var tmpl = {string:""};
-		var item = this.row; /*需要给你关心的数据*/
+		var item = this.row; 
 		var attrValue,reg,strV;
-		tmpl.string = target.innerHTML;  /*模板内容*/
+		tmpl.string = target.innerHTML;
 		if(isNew!=undefined&&isNew)
 		{
 			node = document.createElement(target.nodeName);
@@ -1442,7 +1262,7 @@ www.github.com/flybirdosft
 		{
 			node = this.findNode(itemIndex);
 		}
-		for(j=0;j<target.attributes.length;j++)         /*遍历repeat元素上的属性*/
+		for(j=0;j<target.attributes.length;j++)         
 		{
 			attrValue = target.attributes.item(j).value;
 			for(v in item)
@@ -1537,10 +1357,6 @@ www.github.com/flybirdosft
 	}
 
 
-	/*
-	类型:接口
-	功能:更新页面数据
-	*/
 	template.ModelView.prototype.update = function(condition,row,callback){
 		/*
 		condition,data is json
@@ -1561,10 +1377,7 @@ www.github.com/flybirdosft
 		*/
 	}
 
-	/*
-	类型:接口
-	功能:删除数据
-	*/
+
 	template.ModelView.prototype.delete = function(condition,callback){
 		var itemIndex;
 		var node;
@@ -1578,14 +1391,9 @@ www.github.com/flybirdosft
 		}
 	}
 
-	/*
-	类型:接口
-	功能:删除数据
-	*/
+
 	template.ModelView.prototype.deleteIndex = function(itemIndex,callback){
-		/*
-		itemIndex is this.data index
-		*/
+
 		var node;
 		node = this.findNode(itemIndex);
 		node.parentNode.removeChild(node);
@@ -1596,10 +1404,7 @@ www.github.com/flybirdosft
 		}
 	}
 
-	/*
-	类型:接口
-	功能:添加数据
-	*/
+
 	template.ModelView.prototype.add = function(row,callback){
 		var itemIndex;
 		var node,prevNode = null;
@@ -1622,10 +1427,7 @@ www.github.com/flybirdosft
 		}
 	}
 
-	/*
-	类型:接口
-	功能:插入数据
-	*/
+
 	template.ModelView.prototype.insert = function(rowIndex,row,callback){
 		/*
 		rowIndex is this.data index
@@ -1654,10 +1456,7 @@ www.github.com/flybirdosft
 
 
 
-	/*
-	es5 新特性应用 set get,给数据对象增加get和set方法
-	功能:当外界改变data数组中对象的某个值,能记录下
-	*/
+
 	template.ModelView.prototype.es5GetSet = function(){
 		var len = this.data.length;
 		var i ,j  , v , item , result;
@@ -1777,9 +1576,7 @@ www.github.com/flybirdosft
 		this.changedIndexs.length = 0;
 	}
 
-	/*
-	根据es5 get set 新功能 改变的值,通过refresh更新到页面上
-	*/
+
 	template.ModelView.prototype.refresh = function(){
 		var i,len;
 		len = this.changedIndexs.length;
@@ -1895,7 +1692,7 @@ www.github.com/flybirdosft
 
 		}
 	}
-	/******end tempalte******/
+
 	
 	var Wing = {
 		version:"1.0.0",
